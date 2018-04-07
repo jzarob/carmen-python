@@ -49,7 +49,7 @@ class GeocodeResolver(AbstractResolver):
         # case, with None.get() in turn causing an AttributeError. (None
         # or {}), on the other hand, is {}, and {}.get() is okay.
         tweet_coordinates = (tweet.get('coordinates') or {}).get('coordinates')
-        if not tweet_coordinates:
+        if not tweet_coordinates or (0 not in tweet_coordinates or 1 not in tweet_coordinates):
             return None
         tweet_coordinates = Point(longitude=tweet_coordinates[0],
                                   latitude=tweet_coordinates[1])
